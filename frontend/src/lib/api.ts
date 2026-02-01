@@ -18,7 +18,7 @@ export const signupUser = async (data: {
     const result = await res.json();
 
     if (!res.ok) {
-        throw new Error(result.message || "Signup failed");
+        throw new Error(result.message || result.error || "Signup failed");
     }
 
     return result;
@@ -39,7 +39,7 @@ export const loginUser = async (data: {
     const result = await res.json();
 
     if (!res.ok) {
-        throw new Error(result.message || "Login failed");
+        throw new Error(result.message || result.error || "Login failed");
     }
 
     return result;
