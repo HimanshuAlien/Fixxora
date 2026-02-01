@@ -74,7 +74,7 @@ const AdminIssuesDashboard = () => {
         setIsLoading(true);
         try {
             const token = localStorage.getItem("token");
-            let url = "http://localhost:5000/api/issues/admin/all";
+            let url = `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/issues/admin/all`;
 
             const params = new URLSearchParams();
             if (filterStatus) params.append("status", filterStatus);
@@ -116,7 +116,7 @@ const AdminIssuesDashboard = () => {
         try {
             const token = localStorage.getItem("token");
             const response = await fetch(
-                `http://localhost:5000/api/issues/${selectedIssue._id}/status`,
+                `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/issues/${selectedIssue._id}/status`,
                 {
                     method: "PATCH",
                     headers: {

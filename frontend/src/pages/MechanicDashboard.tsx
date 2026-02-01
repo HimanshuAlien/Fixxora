@@ -38,8 +38,8 @@ export default function MechanicDashboard() {
     try {
       setLoading(true);
       const [openRes, myRes] = await Promise.all([
-        fetch("http://localhost:5000/api/bookings/open", { headers: { Authorization: `Bearer ${token}` } }),
-        fetch("http://localhost:5000/api/bookings/mechanic", { headers: { Authorization: `Bearer ${token}` } }),
+        fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/bookings/open`, { headers: { Authorization: `Bearer ${token}` } }),
+        fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/bookings/mechanic`, { headers: { Authorization: `Bearer ${token}` } }),
       ]);
       const openJobs: Booking[] = openRes.ok ? await openRes.json() : [];
       const myJobs: Booking[] = myRes.ok ? await myRes.json() : [];
@@ -56,12 +56,12 @@ export default function MechanicDashboard() {
 
   // Actions
   const takeJob = async (id: string) => {
-    await fetch(`http://localhost:5000/api/bookings/${id}/accept`, { method: "PATCH", headers: { Authorization: `Bearer ${token}` } });
+    await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/bookings/${id}/accept`, { method: "PATCH", headers: { Authorization: `Bearer ${token}` } });
     toast({ title: "Job Taken" });
     loadJobs();
   };
   const startWork = async (id: string) => {
-    await fetch(`http://localhost:5000/api/bookings/${id}/status`, {
+    await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/bookings/${id}/status`, {
       method: "PATCH",
       headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
       body: JSON.stringify({ status: "in-progress" }),
@@ -70,7 +70,7 @@ export default function MechanicDashboard() {
   };
   const completeJob = async () => {
     if (!selectedJob) return;
-    await fetch(`http://localhost:5000/api/bookings/${selectedJob._id}/complete`, {
+    await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/bookings/${selectedJob._id}/complete`, {
       method: "PATCH",
       headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
       body: JSON.stringify({ description, extraCharge: Number(extraCharge || 0) }),

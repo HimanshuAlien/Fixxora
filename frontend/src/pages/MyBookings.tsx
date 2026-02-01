@@ -91,7 +91,7 @@ const MyBookings = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:5000/api/bookings/my", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/bookings/my`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -199,7 +199,7 @@ const MyBookings = () => {
     }
     try {
       const token = localStorage.getItem("token");
-      await fetch(`http://localhost:5000/api/bookings/${ratingBooking?.fullId}/rate`, {
+      await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/bookings/${ratingBooking?.fullId}/rate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -251,7 +251,7 @@ const MyBookings = () => {
     }
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:5000/api/issues", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/issues`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

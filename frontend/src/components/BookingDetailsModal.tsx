@@ -121,7 +121,7 @@ const BookingDetailsModal = ({ booking, isOpen, onClose, onBookingChange }: Book
     setIsLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`http://localhost:5000/api/bookings/${booking.fullId}/reschedule`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/bookings/${booking.fullId}/reschedule`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -172,7 +172,7 @@ const BookingDetailsModal = ({ booking, isOpen, onClose, onBookingChange }: Book
     setIsLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`http://localhost:5000/api/bookings/${booking.fullId}/cancel`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/bookings/${booking.fullId}/cancel`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

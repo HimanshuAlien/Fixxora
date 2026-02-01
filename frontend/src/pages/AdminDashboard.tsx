@@ -140,7 +140,7 @@ const AdminDashboard = () => {
           return;
         }
 
-        const response = await fetch("http://localhost:5000/api/bookings/admin/all", {
+        const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/bookings/admin/all`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -269,7 +269,7 @@ const AdminDashboard = () => {
       setIsLoadingTechnicians(true);
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("http://localhost:5000/api/users?role=technician", {
+        const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/users?role=technician`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -325,7 +325,7 @@ const AdminDashboard = () => {
     setIsLoadingIssues(true);
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:5000/api/issues/admin/all", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/issues/admin/all`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -365,7 +365,7 @@ const AdminDashboard = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://localhost:5000/api/issues/${selectedIssue._id}/status`,
+        `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/issues/${selectedIssue._id}/status`,
         {
           method: "PATCH",
           headers: {
