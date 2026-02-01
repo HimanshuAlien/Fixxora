@@ -13,12 +13,23 @@ import mongoose from "mongoose";
 
 
 dotenv.config();
-// connectDB(); // Called inside handler for Vercel
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+// Database connection middleware
+app.use(async (req, res, next) => {
+    try {
+        await connectDB();
+        next();
+    } catch (error) {
+        console.error("DB Connection Error:", error);
+        res.status(500).json({ error: "Database connection failed" });
+    }
+});
+
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/addresses", addressRoutes);
 app.use("/api/auth", authRoutes);
@@ -27,7 +38,6 @@ app.use("/api/users", userRoutes);
 
 app.get("/api/health", async (req, res) => {
     try {
-        await connectDB();
         const state = mongoose.connection.readyState;
         res.json({
             status: "ok",
@@ -50,9 +60,4 @@ if (process.env.NODE_ENV !== 'production') {
     });
 }
 
-const handler = async (req, res) => {
-    await connectDB();
-    return app(req, res);
-};
-
-export default handler;
+export default app;
