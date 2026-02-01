@@ -13,6 +13,8 @@ const connectDB = async () => {
     try {
         const db = await mongoose.connect(process.env.MONGO_URI, {
             dbName: "trustac",
+            serverSelectionTimeoutMS: 5000,
+            socketTimeoutMS: 45000,
         });
 
         isConnected = db.connections[0].readyState;
