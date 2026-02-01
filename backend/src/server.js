@@ -7,6 +7,7 @@ import bookingRoutes from "./routes/booking.routes.js";
 import addressRoutes from "./routes/address.routes.js";
 import issueRoutes from "./routes/issue.routes.js";
 import userRoutes from "./routes/user.routes.js";
+import mongoose from "mongoose";
 
 
 
@@ -23,6 +24,20 @@ app.use("/api/addresses", addressRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/issues", issueRoutes);
 app.use("/api/users", userRoutes);
+
+app.get("/api/health", async (req, res) => {
+    try {
+        await connectDB();
+        const state = mongoose.connection.readyState;
+        res.json({
+            status: "ok",
+            dbState: state,
+            states: { 0: "disconnected", 1: "connected", 2: "connecting", 3: "disconnecting" }
+        });
+    } catch (error) {
+        res.status(500).json({ status: "error", error: error.message });
+    }
+});
 
 app.get("/", (req, res) => {
     res.send("TrustAC backend running");
