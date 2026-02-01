@@ -11,6 +11,10 @@ const connectDB = async () => {
     }
 
     try {
+        if (!process.env.MONGO_URI) {
+            throw new Error("MONGO_URI is undefined. Ensure it is set in Vercel Environment Variables.");
+        }
+
         const db = await mongoose.connect(process.env.MONGO_URI, {
             dbName: "trustac",
             serverSelectionTimeoutMS: 5000,
