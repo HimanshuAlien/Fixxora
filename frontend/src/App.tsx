@@ -17,6 +17,7 @@ import Signup from "./pages/Signup";
 import Settings from "./pages/Settings";
 import FAQHelpCenter from "./pages/FAQHelpCenter";
 import NotFound from "./pages/NotFound";
+import MobileNav from "@/components/MobileNav";
 
 const queryClient = new QueryClient();
 
@@ -94,6 +95,12 @@ const App = () => {
           {/* ❌ 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+
+        {/* Mobile Navigation - Hidden on auth pages and large screens */}
+        {!["/login", "/signup"].includes(location.pathname) && (
+          <MobileNav />
+        )}
+
       </TooltipProvider>
     </QueryClientProvider>
   );

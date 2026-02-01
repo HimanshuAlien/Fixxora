@@ -18,6 +18,7 @@ import BookingModal from "@/components/BookingModal";
 import serviceAc from "@/assets/service-ac.jpg";
 import serviceFridge from "@/assets/service-fridge.jpg";
 import serviceWashing from "@/assets/service-washing.jpg";
+import ServiceCard from "@/components/ServiceCard";
 
 interface ServiceDetails {
   name: string;
@@ -407,99 +408,37 @@ const ServicesPage = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.3 }}
-              className="pt-28 pb-20"
+              className="pt-20 pb-20"
             >
               <div className="container mx-auto px-4">
                 {/* Back Button & Title */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="text-center mb-12"
+                  className="mb-6 md:mb-10"
                 >
                   <button
                     onClick={() => setSelectedCategory(null)}
-                    className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-white/80 backdrop-blur-sm rounded-full shadow-md hover:bg-white transition-all text-foreground font-medium"
+                    className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50 transition-all text-sm font-medium text-gray-700"
                   >
-                    <ArrowLeft className="w-5 h-5" />
+                    <ArrowLeft className="w-4 h-4" />
                     Back to Categories
                   </button>
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
-                    <span className="text-gradient">{currentCategory?.title}</span>
+                  <h1 className="text-2xl md:text-4xl font-bold text-gray-900">
+                    {currentCategory?.title}
                   </h1>
                 </motion.div>
 
                 <div className="max-w-6xl mx-auto">
                   {/* Services Grid */}
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                     {currentCategory?.subServices.map((service, index) => (
-                      <motion.div
+                      <ServiceCard
                         key={service.name}
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4, delay: index * 0.1 }}
-                        className="bg-white/80 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group border border-white/50"
-                      >
-                        {/* Service Image */}
-                        <div className="relative h-48 overflow-hidden bg-gradient-to-br from-primary/5 to-accent/5">
-                          <img
-                            src={service.image}
-                            alt={service.name}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          />
-                          <div className="absolute top-3 left-3 px-3 py-1 bg-gradient-to-r from-destructive to-orange-500 text-white text-xs font-bold rounded-full">
-                            {Math.round(((service.originalPrice - service.price) / service.originalPrice) * 100)}% OFF
-                          </div>
-                          <div className="absolute top-3 right-3 px-2 py-1 bg-white/90 backdrop-blur-sm rounded-lg shadow-sm flex items-center gap-1">
-                            <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                            <span className="text-xs font-bold text-foreground">{service.rating}</span>
-                          </div>
-                        </div>
-
-                        {/* Service Content */}
-                        <div className="p-5">
-                          {/* Title & Price */}
-                          <div className="flex items-start justify-between gap-2 mb-4">
-                            <h3 className="text-lg font-bold text-foreground leading-tight">
-                              {service.name}
-                            </h3>
-                            <div className="text-right flex-shrink-0">
-                              <div className="text-xl font-extrabold text-foreground">₹{service.price}</div>
-                              <div className="text-sm text-muted-foreground line-through">₹{service.originalPrice}</div>
-                            </div>
-                          </div>
-
-                          {/* What's Included - Moved to top for visibility */}
-                          <div className="mb-4">
-                            <p className="text-sm font-semibold text-foreground mb-2 flex items-center gap-2">
-                              <Shield className="w-4 h-4 text-primary" />
-                              What's Included:
-                            </p>
-                            <ul className="space-y-1.5">
-                              {service.includes.map((item, i) => (
-                                <li key={i} className="flex items-start gap-2 text-sm text-foreground">
-                                  <Check className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
-                                  <span className="font-normal">{item}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-
-                          {/* Duration */}
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
-                            <Clock className="w-4 h-4" />
-                            <span>{service.duration}</span>
-                          </div>
-
-                          {/* CTA Button */}
-                          <Button
-                            variant="hero"
-                            className="w-full"
-                            onClick={() => handleBookNow(service)}
-                          >
-                            Book Now
-                          </Button>
-                        </div>
-                      </motion.div>
+                        service={service}
+                        onBook={handleBookNow}
+                        index={index}
+                      />
                     ))}
                   </div>
                 </div>

@@ -64,10 +64,10 @@ const Footer = () => {
               <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
                 <Shield className="w-6 h-6 text-primary-foreground" />
               </div>
-              <span className="text-2xl font-bold">TrustAC</span>
+              <span className="text-2xl font-bold">Fixxora</span>
             </Link>
             <p className="text-white/70 text-sm leading-relaxed">
-              India's most trusted home appliance repair service. Get verified technicians 
+              India's most trusted home appliance repair service. Get verified technicians
               at your doorstep with transparent pricing and 30-day service warranty.
             </p>
             <div className="flex gap-3">
@@ -140,8 +140,8 @@ const Footer = () => {
                 </div>
                 <div>
                   <div className="text-xs text-white/50">24/7 Helpline</div>
-                  <a href="tel:+919999999999" className="font-semibold hover:text-primary transition-colors">
-                    +91 99999 99999
+                  <a href="tel:8274949213" className="font-semibold hover:text-primary transition-colors">
+                    8274949213
                   </a>
                 </div>
               </li>
@@ -151,8 +151,8 @@ const Footer = () => {
                 </div>
                 <div>
                   <div className="text-xs text-white/50">Email Support</div>
-                  <a href="mailto:support@trustac.in" className="font-semibold hover:text-primary transition-colors">
-                    support@trustac.in
+                  <a href="mailto:fixxora.support@gmail.com" className="font-semibold hover:text-primary transition-colors">
+                    fixxora.support@gmail.com
                   </a>
                 </div>
               </li>
@@ -176,7 +176,7 @@ const Footer = () => {
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-white/50 text-sm">
-              © {currentYear} <span className="font-semibold text-white">TrustAC</span> — Proof Based Appliance Services
+              © {currentYear} <span className="font-semibold text-white">Fixxora</span> — Proof Based Appliance Services
             </p>
             <div className="flex gap-6">
               <a href="#" className="text-white/50 hover:text-primary text-sm transition-colors">
