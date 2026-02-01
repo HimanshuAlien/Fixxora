@@ -12,7 +12,7 @@ import userRoutes from "./routes/user.routes.js";
 
 
 dotenv.config();
-connectDB();
+// connectDB(); // Called inside handler for Vercel
 
 const app = express();
 
@@ -35,4 +35,9 @@ if (process.env.NODE_ENV !== 'production') {
     });
 }
 
-export default app;
+const handler = async (req, res) => {
+    await connectDB();
+    return app(req, res);
+};
+
+export default handler;
