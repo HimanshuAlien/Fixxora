@@ -93,12 +93,13 @@ const Navbar = () => {
           </div>
 
           {/* Sign In / Logout Button */}
-          <div className="hidden md:block">
+          <div className="flex items-center gap-4">
             {isLoggedIn ? (
               <Button
                 onClick={handleLogout}
                 variant="outline"
-                className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-medium px-6"
+                size="sm"
+                className="hidden md:flex border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-medium px-4 md:px-6"
               >
                 <LogOut className="w-4 h-4 mr-2" />
                 Logout
@@ -107,9 +108,22 @@ const Navbar = () => {
               <Button
                 onClick={handleSignIn}
                 variant="outline"
-                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-medium px-6"
+                size="sm"
+                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-medium px-4 md:px-6"
               >
                 Sign In
+              </Button>
+            )}
+
+            {/* Mobile Logout Icon (only visible when logged in on mobile) */}
+            {isLoggedIn && (
+              <Button
+                onClick={handleLogout}
+                variant="ghost"
+                size="icon"
+                className="md:hidden text-red-500 hover:bg-red-50"
+              >
+                <LogOut className="w-5 h-5" />
               </Button>
             )}
           </div>
